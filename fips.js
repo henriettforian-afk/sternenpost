@@ -29,6 +29,8 @@
     root.hidden = !on || s.fips.hidden;
     back.hidden = !(on && s.fips.hidden);
     if (on && !s.fips.welcomed && !s.fips.hidden) { s.fips.welcomed = true; A.S.save(); say(T("fips_welcome"), 12000); }
+    /* Weihnachtswunsch: unabhängig vom Antippen, kommt genau einmal von selbst, wenn die 24. Tür offen ist */
+    if (on && !s.fips.hidden && s.fips.welcomed && !s.fips.dec24Said && A.unlocked() >= 24 && A.nowDate().getDate() >= 24) { s.fips.dec24Said = true; A.S.save(); say(T("fips_dec24"), 12000); }
     btn.setAttribute("aria-label", T("fips_aria"));
     bhide.textContent = T("fips_hide"); back.textContent = T("fips_back");
     document.dispatchEvent(new Event("advent:helpers"));   /* Luni richtet sich nach Fips */
@@ -37,7 +39,6 @@
   function message() {
     if (pending === "memo") { pending = null; return T("fips_memo"); }
     var unl = A.unlocked(), s = A.S.get();
-    if (unl >= 24 && A.nowDate().getDate() >= 24) return T("fips_dec24");
     for (var d = 1; d <= unl; d++) if (!s.opened[d]) return T("fips_newday");
     if (document.body.classList.contains("tree-open")) return T("fips_tree");
     var n = generic++, g = ["fips_g1", "fips_g2", "fips_g3"];
