@@ -65,7 +65,16 @@
     nowEl = panel.querySelector(".musnow"); playBtn = panel.querySelector(".musplay"); volEl = panel.querySelector(".musvol"); listEl = panel.querySelector(".muslist");
     volEl.value = Math.round(vol * 100);
     list.forEach(function (t, i) { var li = document.createElement("li"), b = document.createElement("button"); b.type = "button"; b.addEventListener("click", function () { setTrack(i, true); }); li.appendChild(b); listEl.appendChild(li); });
-    btn.addEventListener("click", function () { open = !open; panel.hidden = !open; refresh(); });
+    /* Fenster mittig im Bildschirm (auf Handys), sonst rechts am Knopf; nie über den Rand hinaus */
+    function place() {
+      if (!open) return;
+      var vw = document.documentElement.clientWidth, w = Math.min(270, vw * 0.86), wr = wrap.getBoundingClientRect();
+      panel.style.width = w + "px";
+      if (vw <= 600) { panel.style.right = "auto"; panel.style.left = Math.round((vw - w) / 2 - wr.left) + "px"; }
+      else { panel.style.left = ""; panel.style.right = "0"; }
+    }
+    window.addEventListener("resize", place);
+    btn.addEventListener("click", function () { open = !open; panel.hidden = !open; place(); refresh(); });
     playBtn.addEventListener("click", toggle);
     panel.querySelector(".musprev").addEventListener("click", function () { setTrack(a && a.src ? idx - 1 : startIndex(), true); });
     panel.querySelector(".musnext").addEventListener("click", function () { setTrack(a && a.src ? idx + 1 : startIndex(), true); });
