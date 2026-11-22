@@ -1,0 +1,84 @@
+@import url("fonts.css");
+
+@page { size: 210mm 297mm; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #888; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* Egy oldal = a referenciakép saját pixelmérete (1055x1491), A4-re kicsinyítve */
+.page {
+  position: relative; width: 1055px; height: 1491px; overflow: hidden;
+  zoom: 0.7526; page-break-after: always; break-after: page;
+  background-size: 100% 100%; background-repeat: no-repeat;
+  font-family: "Lora", Georgia, serif; color: #4a2418; font-size: 25px; line-height: 1.38;
+}
+@media screen { .page { margin: 0 auto 20px; } }
+@media print { html, body { background: none; } .page { margin: 0; } }
+
+.abs { position: absolute; }
+.script { font-family: "Dancing Script", "Segoe Script", cursive; font-weight: 700; color: #b3271f; }
+.red { color: #b3271f; font-weight: 700; }
+.em { font-style: italic; color: #b3271f; font-weight: 700; }
+.c { text-align: center; }
+
+/* A kép közepének "kitisztítása": krémszínű, lágyan elmosódó foltot teszünk a szöveg alá */
+.patch {
+  position: absolute; background: #fdeacf; border-radius: 110px;
+  box-shadow: 0 0 44px 26px #fdeacf;
+}
+.patch.panel { background: #fdeedc; box-shadow: 0 0 40px 24px #fdeedc; border-radius: 60px; }
+.patch.banner { background: #fee5cd; box-shadow: 0 0 22px 16px #fee5cd; border-radius: 40px; }
+.patch.scroll { background: #f6dfb8; box-shadow: 0 0 16px 12px #f6dfb8; border-radius: 30px; }
+.patch::after { /* finom papírtextúra */
+  content: ""; position: absolute; inset: -20px; border-radius: 70px; opacity: .16; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .4  0 0 0 0 .2  0 0 0 .9 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+}
+
+.text { position: absolute; text-align: center; }
+.text p { margin: 0 0 16px; }
+.hello { font-size: 52px; line-height: 1; text-align: center; }
+.sign1 { font-size: 40px; text-align: center; line-height: 1.1; }
+.sign2 { font-size: 58px; text-align: center; line-height: 1.1; }
+.title { position: absolute; text-align: center; line-height: 1; font-size: 76px; }
+.h2 { position: absolute; text-align: center; line-height: 1; font-size: 50px; }
+
+/* Hanna kódtáblázata */
+.ic { position: absolute; width: 110px; height: 84px; background-image: url("assets/hanna_aufgabe.webp"); mix-blend-mode: darken; }
+.rowname { position: absolute; font-style: italic; font-size: 27px; color: #4a2418; line-height: 1; }
+.rowlet { position: absolute; font-size: 54px; line-height: 1; }
+.rowline { position: absolute; height: 2px; background: #e0c394; }
+
+/* Útvesztő és kirakó */
+.mazebox svg { display: block; }
+.crop { position: absolute; background-repeat: no-repeat; mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 42%, transparent 72%);
+          mask-image: radial-gradient(ellipse at 50% 50%, #000 42%, transparent 72%); }
+.piece { position: absolute; overflow: hidden; border: 2px dashed #8a5a3a; background: #fff; }
+.piece > .shift { position: absolute; left: 0; top: 0; }
+.scissors { position: absolute; font-size: 30px; color: #8a5a3a; line-height: 1; }
+
+.scene { position: relative; overflow: hidden; }
+.scene .sbg { position: absolute; left: 0; top: 0; background-image: url("assets/letzte_mission.webp"); }
+.scene .sfade { position: absolute; left: 0; right: 0; bottom: 0; height: 40px;
+  background: linear-gradient(to bottom, rgba(244,238,233,0), #f4eee9 70%); }
+.scene .skey { position: absolute; background-image: url("assets/anhaenger.webp"); mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 38%, transparent 74%);
+          mask-image: radial-gradient(ellipse at 50% 50%, #000 38%, transparent 74%); }
+
+/* Szülői útmutató */
+.pbody { position: absolute; text-align: left; font-size: 22px; line-height: 1.32; }
+.pbody h3 { margin: 0 0 8px; font-family: "Dancing Script", cursive; font-weight: 700; color: #b3271f; font-size: 42px; line-height: 1.05; }
+.pbody ul { list-style: none; margin: 0 0 12px; padding: 0; }
+.pbody li { position: relative; padding-left: 34px; margin-bottom: 7px; }
+.pbody li::before { content: "★"; position: absolute; left: 0; top: -1px; color: #e0a31c; font-size: 24px; }
+.pbody ol { list-style: none; counter-reset: n; margin: 0 0 12px; padding: 0; }
+.pbody ol li { counter-increment: n; padding-left: 44px; }
+.pbody ol li::before { content: counter(n); color: #fff; background: #b3271f; border-radius: 50%; width: 30px; height: 30px; text-align: center; line-height: 30px; font-size: 19px; font-weight: 700; top: 0; }
+.pbody p { margin: 0 0 10px; }
+.chip { display: inline-block; background: #f9d9a8; border: 2px solid #d5a35a; border-radius: 14px; padding: 1px 8px; font-size: 17px; font-weight: 700; }
+.arrow { color: #b3271f; font-weight: 700; margin: 0 2px; }
+
+/* Új "papír" a guide1.webp háttér panelje fölé (elfedi a régi magyar szöveget; a manó szabadon marad) */
+.paper { position: absolute; left: 0; top: 0; width: 1055px; height: 1491px; background-repeat: no-repeat; background-size: 1055px 1491px; }
+.blob { position: absolute; left: 0; top: 0; width: 1055px; height: 1491px; background-repeat: no-repeat; background-size: 1055px 1491px; }
+.ribbon { position: absolute; left: 205px; top: 82px; width: 610px; height: 240px; }

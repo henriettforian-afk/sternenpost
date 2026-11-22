@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de" translate="no" data-title="doc_adv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<meta name="theme-color" content="#e9bcc6">
+<title>Adventsdorf – Sternenpost vom Nikolaus</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="advent.css">
+</head>
+<body>
+<canvas id="bgsnow" aria-hidden="true"></canvas>
+<img class="pagesnow" alt="" aria-hidden="true" src="assets/adv/deco_snow.png" onerror="this.remove()">
+<div class="pagedeco" aria-hidden="true"><img class="dl" alt="" src="assets/adv/deco_left.png" onerror="this.remove()"><img class="dr" id="decoR" alt="" src="assets/adv/deco_right.png" onerror="this.remove()"></div>
+<script>/* rechts: Tüftel oder Nikolaus, bei jedem Besuch zufällig; fehlt eine Datei, bleibt die andere */
+(function () { var im = document.getElementById("decoR"); if (!im) return; var alt = "assets/adv/deco_right2.png", pick = Math.random() < 0.5, a = new Image(); a.onload = function () { if (pick) im.src = alt; }; a.src = alt; })();
+</script>
+<div class="app" id="app">
+  <header class="top">
+    <nav class="crumbs" data-i18n-aria="nav_aria" aria-label="Seitenwechsel">
+      <a class="pill" href="wichtelfunk.html" data-i18n="nav_radio">✦ Zum Wichtelfunk</a>
+      <div class="langs"></div>
+    </nav>
+    <p class="kicker" data-i18n="brand">Sternenpost vom Nikolaus</p>
+    <h1 data-i18n="adv_title">Adventsdorf</h1>
+    <p class="datehint" id="datehint"></p>
+    <p class="testbanner" id="testbanner" hidden></p>
+    <div class="bar">
+      <div class="light" aria-live="polite"><img src="assets/adv/topper.png" alt=""><span><b id="lightnum">0</b> <span data-i18n="light_unit">Sternenlicht</span></span></div>
+      <button type="button" class="btn small" id="btnLuni" data-i18n="btn_luni">Luni besuchen</button>
+      <button type="button" class="btn small" id="btnHub" data-i18n="btn_hub">Wichtelspiele</button>
+      <span class="hubhidden" hidden>
+      <button type="button" class="btn small" id="btnMemo" data-i18n="btn_memo">Wichtel-Memo</button>
+      <button type="button" class="btn small" id="btnPuzzle" data-i18n="btn_puzzle">Sternenpuzzle</button>
+      <button type="button" class="btn small" id="btnHidden" data-i18n="btn_hidden">Fips’ Suchstube</button>
+      <button type="button" class="btn small" id="btnGZ" data-i18n="btn_gz">Geschenkzauber</button>
+      <button type="button" class="btn small" id="btnTr" data-i18n="btn_tr">Wichtel-Trio</button>
+      <button type="button" class="btn small" id="btnPf" data-i18n="btn_pf">Wichtel-Postfenster</button>
+      <button type="button" class="btn small" id="btnGf" data-i18n="btn_gf">Geschenkefänger</button>
+      <button type="button" class="btn small" id="btnMatch" data-i18n="btn_match">Sternenzauber</button>
+      <button type="button" class="btn small" id="btnColor" data-i18n="btn_color">Sternenmalerei</button>
+      </span>
+      <button type="button" class="btn small bookbtn" id="btnBook"><span data-i18n="btn_book">Sternenbuch</span><i class="newsdot" aria-hidden="true"></i></button>
+      <button type="button" class="btn small alt" id="btnTree" data-i18n="btn_tree">Weihnachtsbaum</button>
+    </div>
+    <details class="testpanel" id="testpanel" hidden><summary data-i18n="test_title">Testmodus</summary>
+      <div class="testbody">
+        <button type="button" class="btn small" id="btnReset2" data-i18n="btn_reset">Fortschritt löschen</button>
+        <p class="thint" data-i18n="test_reset_hint"></p>
+        <button type="button" class="btn small alt" id="btnStars">+10 ★ (Test)</button>
+        <button type="button" class="btn small alt" id="btnAllDeco" data-i18n="test_openall"></button>
+        <label for="testdate" data-i18n="test_label"></label> <select id="testdate"></select>
+      </div>
+    </details>
+  </header>
+
+  <div class="layout">
+    <section class="scene" id="scene" data-i18n-aria="scene_aria" aria-label="Das Schneedorf mit 24 Türchen">
+      <div class="decor" id="decor"></div>
+      <div class="doors" id="doors"></div>
+      <div class="slots" id="slots"></div>
+      <button type="button" class="lunihot" id="lunihot"></button>
+    </section>
+
+    <aside class="side">
+      <section class="residents" aria-labelledby="restitle">
+        <h2 id="restitle" data-i18n="res_title">Die Dorfbewohner</h2>
+        <div id="reslist"></div>
+      </section>
+      <p class="privacy" data-i18n="privacy">Dein Fortschritt wird nur auf diesem Gerät gespeichert. Es gibt keine Anmeldung und keine Datensammlung.</p>
+      <a class="link" href="wichtelfunk.html" data-i18n="link_radio">Fips’ Wichtelfunk anhören</a><br>
+      <button type="button" class="link" id="fipsback" hidden></button><br>
+      <button type="button" class="link" id="btnReset" data-i18n="btn_reset">Fortschritt löschen</button>
+    </aside>
+  </div>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Fenster" hidden>
+  <div class="mcard">
+    <button type="button" class="mclose" id="mclose" data-i18n-aria="close" aria-label="Schließen">✕</button>
+    <div id="mbody"></div>
+  </div>
+</div>
+
+<div class="fipshelper" id="fipshelper" hidden>
+  <div class="fipsbubble" id="fipsbubble" role="status" hidden><p id="fipstext"></p><button type="button" class="link" id="fipshide"></button></div>
+  <button type="button" class="fipsbtn" id="fipsbtn"><img id="fipsimg" src="assets/adv/fips_wave.png" alt=""><i class="newsdot" aria-hidden="true"></i></button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data/days.js"></script>
+<script src="data/days_tx.js"></script>
+<script src="data/days_hu.js"></script>
+<script src="data/decor.js"></script>
+<script src="data/state.js"></script>
+<script src="data/i18n.js"></script>
+<script src="app.js"></script>
+<script src="luni.js"></script>
+<script src="resdeco.js"></script>
+<script src="music.js"></script>
+<script src="data/tree.js"></script>
+<script src="tree.js"></script>
+<script src="data/book.js"></script>
+<script src="memo.js"></script>
+<script src="data/hidden.js"></script>
+<script src="hidden.js"></script>
+<script src="gz_logic.js"></script>
+<script src="gz.js"></script>
+<script src="tr_logic.js"></script>
+<script src="tr.js"></script>
+<script src="po.js"></script>
+<script src="gf.js"></script>
+<script src="match3_logic.js"></script>
+<script src="match3.js"></script>
+<script src="data/puzzle.js"></script>
+<script src="puzzle.js"></script>
+<script src="data/color.js"></script>
+<script src="data/color_img.js"></script>
+<script src="color.js"></script>
+<script src="data/book_tx.js"></script>
+<script src="book.js"></script>
+<script src="data/games.js"></script>
+<script src="hub.js"></script>
+<script src="data/helper_talk.js"></script>
+<script src="talk.js"></script>
+<script src="fips.js"></script>
+<script src="luni_helper.js"></script>
+<script>
+/* leiser Schneefall (nur wenn keine reduzierte Bewegung gewünscht ist) */
+(function () {
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var cv = document.getElementById("bgsnow"), cx = cv.getContext("2d"), W, H, fl = [];
+  function size() { var d = window.devicePixelRatio || 1; W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0);
+    fl = []; var n = Math.round(W * H / 16000); for (var i = 0; i < n; i++) fl.push({ x: Math.random() * W, y: Math.random() * H, r: 1.2 + Math.random() * 2.2, s: 0.25 + Math.random() * 0.5, p: Math.random() * 6.28 }); }
+  function tick() { cx.clearRect(0, 0, W, H); cx.fillStyle = "rgba(255,255,255,.9)";
+    fl.forEach(function (f) { f.y += f.s; f.p += 0.012; f.x += Math.sin(f.p) * 0.3; if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; } cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, 6.283); cx.fill(); });
+    requestAnimationFrame(tick); }
+  size(); addEventListener("resize", size); tick();
+})();
+</script>
+</body>
+</html>

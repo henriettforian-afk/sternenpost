@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="de" translate="no" data-title="doc_wf">
+<head>
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e9bcc6">
+<title>Wichtelfunk – Sternenpost vom Nikolaus</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root { --red:#b3271f; --brown:#4a2418; --paper:#fdeedc; --wood1:#9a6038; --wood2:#5f3a1f; --gold:#e9b640; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { font-family: "Lora", Georgia, serif; color: var(--brown); line-height: 1.5; overflow-x: hidden;
+    background: linear-gradient(#e9bcc6 0%, #dcb7d6 38%, #f0d3d6 100%) fixed; }
+  /* Papiertextur über allem */
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .22; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='6'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .4  0 0 0 0 .25  0 0 0 .8 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>"); }
+
+  .page { max-width: 1080px; margin: 0 auto; padding: 14px 14px 0; }
+
+  /* Kopf */
+  .banner { width: 100%; max-width: 560px; margin: 0 auto; aspect-ratio: 585 / 220;
+    background: url("assets/noel_brief.webp") 45.7% 6.3% / 180.3% auto no-repeat;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 58%, transparent 82%); mask-image: radial-gradient(ellipse at 50% 50%, #000 58%, transparent 82%); }
+  .head { text-align: center; margin-top: -14px; }
+  h1 { margin: 0; font-family: "Dancing Script", cursive; font-weight: 700; font-size: clamp(54px, 15vw, 88px); line-height: 1; color: var(--red);
+    text-shadow: 0 2px 0 #fff3e0, 0 0 22px rgba(255,235,200,.9); }
+  .sub { margin: 2px 0 0; font-style: italic; font-size: clamp(17px, 4.6vw, 21px); color: #6a2a22; }
+
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 14px; align-items: start; }
+
+  /* Szene: Fips' Postamt */
+  .stage { position: relative; width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 1.12; border-radius: 46% 46% 22px 22px / 30% 30% 22px 22px;
+    overflow: hidden; border: 9px solid var(--wood2); box-shadow: 0 0 0 3px #c99a5b, 0 14px 28px rgba(80,30,40,.35), inset 0 0 40px rgba(60,30,10,.35);
+    background: url("assets/dorf_bg.jpg") 85% 12% / 250% auto no-repeat, #e6b9c4; }
+  .stage canvas { position: absolute; inset: 0; width: 100%; height: 66%; pointer-events: none; }
+  .glow { position: absolute; left: 62%; top: 4%; width: 46%; aspect-ratio: 1; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(255,214,120,.55), rgba(255,214,120,0) 68%); animation: flicker 5s ease-in-out infinite; }
+  @keyframes flicker { 0%,100% { opacity: .75; } 40% { opacity: 1; } 70% { opacity: .62; } }
+  .lantern { position: absolute; left: 70%; top: 3%; width: 20%; aspect-ratio: 110 / 160; background: url("assets/noel_brief.webp") 12.7% 12.8% / 959% auto no-repeat; mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 55%, transparent 90%); mask-image: radial-gradient(ellipse at 50% 50%, #000 55%, transparent 90%); }
+  .desk { position: absolute; left: 0; right: 0; bottom: 0; height: 27%;
+    background: linear-gradient(#b27a47, #8a552d 40%, #6a3e20); border-top: 6px solid #d2a367; box-shadow: 0 -6px 14px rgba(40,20,10,.35); }
+  .desk::after { content: ""; position: absolute; inset: 0; opacity: .25; background: repeating-linear-gradient(90deg, rgba(0,0,0,.25) 0 2px, transparent 2px 22px); }
+  .fips { position: absolute; left: 1%; bottom: 3%; width: 34%; aspect-ratio: 290 / 410; background: url("assets/noel_brief.webp") 2.6% 82.3% / 363.8% auto no-repeat;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 52%, transparent 78%); mask-image: radial-gradient(ellipse at 50% 50%, #000 52%, transparent 78%); }
+  .playing .fips { animation: nod 1.6s ease-in-out infinite; transform-origin: 50% 100%; }
+  @keyframes nod { 0%,100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.4deg); } }
+  .letters { position: absolute; right: 0; bottom: 2%; width: 33%; aspect-ratio: 290 / 300; background: url("assets/guide1.webp") 86.3% 39.5% / 363.8% auto no-repeat; mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 50%, transparent 82%); mask-image: radial-gradient(ellipse at 50% 50%, #000 50%, transparent 82%); }
+  .radio { position: absolute; left: 31%; bottom: 7%; width: 40%; }
+  .radio svg, .radio img { display: block; width: 100%; height: auto; }
+  .dialglow { opacity: .2; transition: opacity .6s; }
+  .playing .dialglow { opacity: 1; }
+  .needle { transform-box: view-box; transform-origin: 112px 126px; transition: transform .6s; }
+  .playing .needle { animation: tune 3.2s ease-in-out infinite; }
+  .paused .needle { animation-play-state: paused; }
+  @keyframes tune { 0%,100% { transform: rotate(-10deg); } 50% { transform: rotate(11deg); } }
+  .sparkle { position: absolute; width: 10px; height: 10px; background: radial-gradient(circle, #fff, rgba(255,235,170,0) 70%); border-radius: 50%; animation: tw 3.4s ease-in-out infinite; pointer-events: none; }
+  @keyframes tw { 0%,100% { opacity: .15; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.2); } }
+
+
+  /* Briefe fallen sanft und bilden einen kleinen Haufen */
+  .fall { position: absolute; z-index: 5; width: 14%; aspect-ratio: 140 / 95; left: var(--x); top: var(--y); transform: rotate(var(--r1)); opacity: 0; pointer-events: none;
+    background: url("assets/guide1.webp") 72.1% 34.4% / 753% auto no-repeat; filter: drop-shadow(0 3px 3px rgba(40,15,5,.5));
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 60%, transparent 68%); mask-image: radial-gradient(ellipse at 50% 50%, #000 60%, transparent 68%); }
+  .app-open .fall { opacity: 1; animation: drop var(--d) cubic-bezier(.25,.7,.35,1) var(--t) both; }
+  @keyframes drop { from { transform: translateY(-900%) rotate(var(--r0)); opacity: 0; } 12% { opacity: 1; } to { transform: translateY(0) rotate(var(--r1)); opacity: 1; } }
+
+  /* Platz für eigene gemalte Bilder (PNG mit transparentem Hintergrund) */
+  .has-fips .fips { left: 0; bottom: 1%; width: 50%; background-image: var(--fipsimg); background-size: contain; background-position: 50% 100%; -webkit-mask-image: none; mask-image: none; }
+  .has-radio .radio svg { display: none; }
+  .has-radio .radio .art { display: block; }
+  .radio .art { display: none; width: 100%; height: auto; }
+
+  /* Bedienung */
+  .panel { max-width: 520px; width: 100%; margin: 0 auto; text-align: center; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 12px 30px; border: 0; border-radius: 34px 30px 36px 30px / 30px 36px 30px 34px;
+    font-family: "Lora", Georgia, serif; font-weight: 700; font-size: 20px; color: #fff; cursor: pointer;
+    background: linear-gradient(#c5322a, #9a1d1b); box-shadow: 0 5px 0 #6f1210, 0 10px 18px rgba(90,20,20,.35); max-width: 100%; }
+  .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #6f1210; }
+  .btn:focus-visible, .link:focus-visible { outline: 4px solid #1b6fdc; outline-offset: 3px; }
+  .btn .ico { font-size: 22px; line-height: 1; }
+  .state { min-height: 1.6em; margin: 10px 0 0; font-size: 16px; color: #6a2a22; }
+  .error { margin: 12px auto 0; padding: 10px 14px; background: #fff3d6; border: 2px solid #d9a441; border-radius: 16px; color: #6a2a22; font-size: 16px; }
+  .link { margin-top: 8px; background: none; border: 0; font: inherit; font-size: 17px; color: var(--red); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; padding: 10px 14px; }
+
+  /* Pergament mit Fips' Text */
+  .scroll { position: relative; margin: 10px auto 0; max-width: 520px; padding: 22px 22px 24px; text-align: left; font-size: 18px; line-height: 1.6; color: #3c1c14;
+    background: radial-gradient(ellipse at 50% 40%, #fff6e2 0%, #f8e6c4 70%, #efd3a4 100%);
+    border-radius: 18px 28px 20px 30px / 28px 18px 30px 20px; box-shadow: inset 0 0 30px rgba(190,130,60,.35), 0 8px 18px rgba(80,30,30,.25); }
+  .scroll[hidden] { display: none; }
+  .scroll p { margin: 0; overflow-wrap: anywhere; }
+  .scroll .t { font-family: "Dancing Script", cursive; font-weight: 700; font-size: 26px; color: var(--red); margin-bottom: 4px; display: block; }
+
+  .bottom { position: relative; margin: 26px -14px 0; aspect-ratio: 1055 / 400; max-height: 260px; width: calc(100% + 28px);
+    background: url("assets/noel_brief.webp") 50% 100% / cover no-repeat;
+    -webkit-mask-image: linear-gradient(transparent, #000 45%); mask-image: linear-gradient(transparent, #000 45%); }
+
+
+  /* Versiegelter Brief am Anfang */
+  .sub .after, .sub .before { display: inline; }
+  .sub .before { display: none; } .sealed .sub .before { display: inline; } .sealed .sub .after { display: none; }
+  .hint { margin: 4px 0 0; font-size: 16px; color: #6a2a22; }
+  .app-open .hint { display: none; }
+  .seal { position: absolute; left: 50%; top: 45%; width: 48%; aspect-ratio: 235 / 246; transform: translate(-50%, -50%); z-index: 6; border: 0; padding: 0; cursor: pointer; background-color: transparent;
+    background-image: url("assets/anhaenger.webp"); background-size: 449% auto; background-position: 92.7% 92.4%; background-repeat: no-repeat;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 54%, transparent 62%); mask-image: radial-gradient(circle at 50% 50%, #000 54%, transparent 62%);
+    filter: drop-shadow(0 6px 10px rgba(60,10,10,.45)); animation: pulse 2.6s ease-in-out infinite; }
+  .seal:focus-visible { outline: 4px solid #1b6fdc; outline-offset: 6px; border-radius: 50%; }
+  @keyframes pulse { 0%,100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.06); } }
+  .app-open .seal { display: none; }
+  .opening .seal { animation: crack .7s ease-in forwards; }
+  @keyframes crack { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 35% { transform: translate(-50%, -50%) scale(1.15) rotate(-6deg); } 100% { transform: translate(-50%, -62%) scale(1.5) rotate(10deg); opacity: 0; } }
+  .scene-item { transition: opacity .9s ease; }
+  .sealed .scene-item { opacity: 0; visibility: hidden; }
+  .sealed .panel { display: none; }
+  .sealed .grid { grid-template-columns: minmax(0, 1fr); }
+  .sealed .stage { justify-self: center; margin: 0 auto; }
+  .sealed .stage::after { content: ""; position: absolute; inset: 0; background: rgba(60,20,40,.18); pointer-events: none; }
+  @media (min-width: 900px) {
+    .page { padding: 22px 28px 0; }
+    .grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 34px; align-items: center; margin-top: 26px; }
+    .stage { max-width: 580px; margin: 0; justify-self: end; }
+    .panel { margin: 0; justify-self: start; text-align: left; max-width: 460px; }
+    .scroll { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glow, .sparkle, .seal, .playing .fips, .playing .needle { animation: none !important; }
+    .app-open .fall { animation: none !important; }
+    .stage canvas { display: none; }
+  }
+  /* Neuer, ruhiger Anfangsbildschirm */
+  .kicker { margin: 18px 0 0; font-family: "Dancing Script", cursive; font-weight: 700; font-size: clamp(24px, 6.4vw, 32px); color: #8d2a24; text-align: center; }
+  .head { margin-top: 0; }
+  .intro { display: flex; justify-content: center; padding: 18px 0 40px; }
+  .sealwrap { position: relative; width: min(74vw, 340px); aspect-ratio: 1; }
+  .sealwrap::before { content: ""; position: absolute; inset: -22%; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(255,226,160,.8) 0%, rgba(255,226,160,0) 62%); animation: halo 3.2s ease-in-out infinite; }
+  @keyframes halo { 0%,100% { opacity: .55; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.05); } }
+  .seal { position: relative; left: auto; top: auto; width: 100%; aspect-ratio: 1; transform: none; z-index: 2; border-radius: 50%;
+    background-image: url("assets/anhaenger.webp"); background-size: 405.8% auto; background-position: 96.5% 92.3%; background-repeat: no-repeat;
+    -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, #000 80%, transparent 89%); mask-image: radial-gradient(circle closest-side at 50% 50%, #000 80%, transparent 89%); clip-path: none; filter: none; animation: sealpulse 2.8s ease-in-out infinite; }
+  .seal:focus-visible { outline: 4px solid #1b6fdc; outline-offset: 6px; border-radius: 50%; }
+  @keyframes sealpulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+  .sealwrap { filter: drop-shadow(0 10px 16px rgba(80,15,20,.4)); }
+  .opening .seal { animation: crack2 .7s ease-in forwards; }
+  @keyframes crack2 { 0% { transform: scale(1); opacity: 1; } 35% { transform: scale(1.12) rotate(-6deg); } 100% { transform: scale(1.5) rotate(12deg); opacity: 0; } }
+  .app-open .intro { display: none; }
+  .sealed .grid { display: none; }
+  .app-open .grid { animation: fadein .9s ease both; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .sealwrap::before, .seal, .app-open .grid { animation: none !important; } }
+
+  .has-fips .letters { display: none; }
+  .has-fips .fips { width: 47%; left: 1%; bottom: 3%; }
+
+/* Musik-Knopf (erscheint nur, wenn Musikdateien in audio/music liegen) */
+.musicbtn { display: inline-grid; place-items: center; width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 2px solid #e3c88f; background: linear-gradient(#fff6dc, #f6e4b4); color: #8d2a24; font-size: 22px; line-height: 1; cursor: pointer; box-shadow: 0 2px 6px rgba(90, 40, 30, .25); }
+.musicbtn.on { background: linear-gradient(#c5322a, #9a1d1b); color: #fff; border-color: #6f1210; }
+.musicbtn:focus-visible { outline: 4px solid #1b6fdc; outline-offset: 2px; }
+
+/* Musik-Fenster */
+.musicwrap { position: relative; display: inline-block; }
+.musicpanel { position: absolute; right: 0; top: 48px; z-index: 60; width: 270px; max-width: 86vw; padding: 12px 12px 10px; text-align: left; border-radius: 16px; background: linear-gradient(#fffaf0, #f9ebc9); border: 2px solid #d7b36a; box-shadow: 0 8px 20px rgba(60, 30, 20, .35); font-family: "Lora", Georgia, serif; }
+.musicpanel[hidden] { display: none; }
+.mushead { font-family: "Dancing Script", cursive; font-size: 24px; line-height: 1.1; color: #b8362e; }
+.musnow { margin: 2px 0 8px; font-size: 14px; font-weight: 700; color: #3b2418; min-height: 1.3em; }
+.muscontrols { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
+.muscontrols button { min-width: 48px; height: 40px; border: 0; border-radius: 20px; background: linear-gradient(#c5322a, #9a1d1b); color: #fff; font-size: 17px; cursor: pointer; box-shadow: 0 3px 0 #6f1210; }
+.muscontrols button:active { transform: translateY(2px); box-shadow: 0 1px 0 #6f1210; }
+.musvol { width: 100%; margin: 0 0 8px; accent-color: #b8362e; }
+.muslist { list-style: none; margin: 0; padding: 0; max-height: 190px; overflow-y: auto; }
+.muslist li button { display: block; width: 100%; padding: 6px 8px; text-align: left; border: 0; border-radius: 8px; background: none; font: inherit; font-size: 14px; color: #3b2418; cursor: pointer; }
+.muslist li button:hover { background: rgba(215, 179, 106, .25); }
+.muslist li.cur button { background: rgba(184, 54, 46, .12); font-weight: 700; color: #8d2a24; }
+.muslist li.cur button::before { content: "♪ "; }
+.musicpanel button:focus-visible, .musvol:focus-visible { outline: 3px solid #1b6fdc; outline-offset: 2px; }
+  /* getrennter Bereich für die Funksprüche (die Aufgabe bleibt oben) */
+  .tasktag { margin: 0 0 6px; font-size: 14px; font-weight: 700; letter-spacing: .02em; color: #8d2a24; }
+  .taskbox { max-width: 520px; margin: 22px auto 0; padding: 14px 16px 14px; text-align: center; border-radius: 18px; background: rgba(255, 250, 238, .82); border: 2px solid #c5322a; box-shadow: 0 4px 10px rgba(80, 40, 20, .15); }
+  .taskbox .tasktag { font-family: "Dancing Script", cursive; font-size: 28px; font-weight: 700; letter-spacing: 0; line-height: 1.1; color: #b8362e; margin: 0 0 10px; }
+  .funkboard { margin-top: 0; }
+  .funkboard { max-width: 520px; margin: 22px auto 0; padding: 14px 16px 12px; text-align: center; border-radius: 18px; background: rgba(255, 250, 238, .82); border: 2px dashed #d7b36a; box-shadow: 0 4px 10px rgba(80, 40, 20, .15); }
+  .funkboard h3 { margin: 0; font-family: "Dancing Script", cursive; font-size: 30px; color: #b8362e; line-height: 1.1; }
+  .fbsub { margin: 2px 0 10px; font-size: 15px; color: #6a2a22; }
+  .funkwho { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .funkboard .funkline { margin-top: 12px; }
+  /* zufällige Funksprüche */
+  .funkline { max-width: 520px; margin: 14px auto 0; padding: 12px 16px; text-align: left; border-radius: 16px; background: linear-gradient(#fff6dc, #f6e4b4); border: 2px solid #d7b36a; box-shadow: 0 4px 10px rgba(80, 40, 20, .25); animation: fadein .6s ease both; }
+  .funkline[hidden] { display: none; }
+  .funkline b { display: block; font-family: "Dancing Script", cursive; font-size: 24px; color: #b8362e; line-height: 1.1; }
+  .funkline p { margin: 2px 0 0; font-size: 17px; line-height: 1.4; color: #3b2418; }
+  #funktoggle { display: block; margin: 8px auto 0; }
+  .chatter .rneedle { animation: rtune 4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .funkline { animation: none; } .chatter .rneedle { animation: none; transform: rotate(8deg); } }
+  .has-fips .fips, .fips, .letters { display: none !important; } /* nur das Radio: Fips bleibt geheim */
+  .has-radio .radio { left: 50%; width: 68%; bottom: 13%; transform: translateX(-50%); }
+  .rneedle { position: absolute; left: 33.5%; top: 38.6%; width: 2.2%; height: 16.4%; display: none; pointer-events: none;
+    background: linear-gradient(90deg, #ff5a45, #c9261d 55%, #a01b16); clip-path: polygon(50% 0, 100% 100%, 0 100%); transform-origin: 50% 113.3%; transition: transform .6s ease; }
+  .has-radio .rneedle { display: block; }
+  .playing .rneedle { animation: rtune 7s ease-in-out infinite; }
+  .paused .rneedle { animation-play-state: paused; }
+  @keyframes rtune { 0%,100% { transform: rotate(-6deg); } 12% { transform: rotate(18deg); } 20% { transform: rotate(14deg); } 38% { transform: rotate(-20deg); } 45% { transform: rotate(-17deg); } 62% { transform: rotate(9deg); } 78% { transform: rotate(24deg); } 90% { transform: rotate(-4deg); } }
+  @media (prefers-reduced-motion: reduce) { .playing .rneedle { animation: none; transform: rotate(8deg); } }
+  .lantern { display: none; }
+  .fall { display: none; } /* Briefe-Haufen erst mit gemaltem Bild von Fips */
+
+  /* Weihnachtlicher Hintergrund: Schneehügel und leiser Schneefall */
+  .page { position: relative; z-index: 2; }
+  #bgsnow { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+  .hills { position: fixed; left: 0; right: 0; bottom: 0; height: clamp(110px, 24vh, 260px); z-index: 0; pointer-events: none; }
+  .hills svg { display: block; width: 100%; height: 100%; }
+  .has-bg { background-size: cover; background-position: 50% 100%; background-attachment: fixed; }
+  .has-bg .hills { display: none; }
+  .has-seal .seal { background-image: var(--sealimg); background-size: contain; background-position: 50% 50%; -webkit-mask-image: none; mask-image: none; }
+
+  /* Navigation zwischen den beiden Seiten */
+  .crumbs { display: flex; justify-content: center; padding: 10px 0 0; position: relative; z-index: 5; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 18px; border-radius: 26px 22px 26px 22px / 22px 26px 22px 26px; text-decoration: none; font-weight: 700; font-size: 16px; color: #7a1d18;
+    background: rgba(253,238,220,.95); border: 2px solid #e8c88f; box-shadow: 0 4px 10px rgba(80,30,40,.22); }
+  .pill:hover { background: #fff6e4; }
+  .pill:focus-visible { outline: 4px solid #1b6fdc; outline-offset: 3px; }
+  .gnote { margin: 6px 0 0; font-size: 15px; color: #6a2a22; font-style: italic; }
+  .trans { margin-top: 12px; padding-top: 10px; border-top: 1px dashed #c99a5b; }
+  .trans .tl { font-size: 14px; font-style: italic; color: #8d2a24; }
+  .trans p { font-size: 17px; margin-top: 2px; }
+  .crumbs { flex-wrap: wrap; gap: 10px; align-items: center; }
+  .langs { display: inline-flex; gap: 4px; padding: 3px; background: rgba(253,238,220,.95); border: 2px solid #e8c88f; border-radius: 26px; box-shadow: 0 4px 10px rgba(80,30,40,.22); }
+  .langs button { min-width: 44px; min-height: 40px; padding: 0 10px; border: 0; border-radius: 22px; background: transparent; font: 700 15px "Lora", serif; color: #7a1d18; cursor: pointer; box-shadow: none; }
+  .langs button[aria-pressed="true"] { background: #b3271f; color: #fff; }
+  .langs button:focus-visible { outline: 4px solid #1b6fdc; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="hills" aria-hidden="true"><svg viewBox="0 0 1000 200" preserveAspectRatio="none"><defs><linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e8f4"/><stop offset="1" stop-color="#e4d2ea"/></linearGradient><linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f4e6ee"/></linearGradient></defs><path d="M0 70 C140 20 260 90 420 60 S720 10 1000 66 L1000 200 L0 200Z" fill="url(#h1)"/><path d="M0 120 C180 80 300 140 520 112 S860 74 1000 118 L1000 200 L0 200Z" fill="url(#h2)"/><path d="M0 120 C180 80 300 140 520 112 S860 74 1000 118" fill="none" stroke="#d9c7e3" stroke-width="3" opacity=".6"/></svg></div>
+<canvas id="bgsnow" aria-hidden="true"></canvas>
+<div class="page sealed" id="app">
+  <nav class="crumbs" data-i18n-aria="nav_aria" aria-label="Seitenwechsel"><a class="pill" href="advent.html" data-i18n="nav_adv">✦ Zum Adventsdorf</a><div class="langs"></div></nav>
+  <header class="head">
+    <p class="kicker" data-i18n="brand">Sternenpost vom Nikolaus</p>
+    <h1 data-i18n="wf_title">Wichtelfunk</h1>
+    <p class="sub"><span class="before" data-i18n="wf_sub_before">Eine geheime Nachricht ist eingetroffen!</span><span class="after" data-i18n="wf_sub_after">Eine geheime Nachricht von Fips!</span></p>
+    <p class="hint" data-i18n="wf_hint">Tippe auf das Siegel, um den Brief zu öffnen.</p>
+  </header>
+
+  <div class="intro" id="intro"><div class="sealwrap"><button class="seal" id="seal" type="button" data-i18n-aria="wf_seal_aria" aria-label="Siegel brechen und die geheime Nachricht öffnen"></button></div></div>
+
+  <div class="grid">
+    <div class="stage" id="stage" role="img" data-i18n-aria="wf_stage_aria" aria-label="Ein altes Radio im verschneiten Dorf. Draußen schneit es.">
+      <canvas id="snow" aria-hidden="true"></canvas>
+      <div class="glow"></div>
+      <div class="lantern"></div>
+      <div class="desk scene-item"></div>
+      <div class="letters scene-item"></div>
+      <div class="fips scene-item"></div>
+      <div class="radio scene-item"><img class="art" id="radioart" alt="" aria-hidden="true"><i class="rneedle" aria-hidden="true"></i>
+        <svg viewBox="0 0 250 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c98a4d"/><stop offset=".5" stop-color="#a96a35"/><stop offset="1" stop-color="#7d4a24"/></linearGradient>
+            <radialGradient id="dg" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#f3b955"/></radialGradient>
+            <radialGradient id="kn" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#b9862a"/></radialGradient>
+          </defs>
+          <rect x="22" y="2" width="6" height="26" rx="3" transform="rotate(24 25 15)" fill="#6a3a1c"/>
+          <rect x="6" y="26" width="238" height="150" rx="26" fill="url(#wood)" stroke="#5b3318" stroke-width="5"/>
+          <rect x="14" y="34" width="222" height="134" rx="20" fill="none" stroke="#e8c070" stroke-width="2.5"/>
+          <rect x="22" y="46" width="112" height="62" rx="9" fill="#f3dcab" stroke="#5b3318" stroke-width="3"/>
+          <rect class="dialglow" x="24" y="48" width="108" height="58" rx="7" fill="url(#dg)"/>
+          <g stroke="#6a3a1c" stroke-width="1.4"><line x1="34" y1="94" x2="122" y2="94"/><line x1="40" y1="90" x2="40" y2="98"/><line x1="56" y1="90" x2="56" y2="98"/><line x1="72" y1="90" x2="72" y2="98"/><line x1="88" y1="90" x2="88" y2="98"/><line x1="104" y1="90" x2="104" y2="98"/><line x1="120" y1="90" x2="120" y2="98"/></g>
+          <g class="needle"><line x1="112" y1="126" x2="112" y2="56" stroke="#b3271f" stroke-width="3" stroke-linecap="round"/></g>
+          <circle cx="188" cy="92" r="36" fill="#6a3a1c"/><circle cx="188" cy="92" r="31" fill="#3c2514" stroke="#e8c070" stroke-width="3"/>
+          <g fill="#7b5230"><circle cx="188" cy="92" r="4"/><circle cx="188" cy="76" r="3"/><circle cx="188" cy="108" r="3"/><circle cx="172" cy="92" r="3"/><circle cx="204" cy="92" r="3"/><circle cx="176" cy="80" r="3"/><circle cx="200" cy="80" r="3"/><circle cx="176" cy="104" r="3"/><circle cx="200" cy="104" r="3"/></g>
+          <circle cx="44" cy="136" r="13" fill="url(#kn)" stroke="#6a3a1c" stroke-width="2.5"/><circle cx="84" cy="136" r="13" fill="url(#kn)" stroke="#6a3a1c" stroke-width="2.5"/>
+          <path d="M120 136 h100" stroke="#5b3318" stroke-width="3" stroke-dasharray="3 7" stroke-linecap="round"/>
+          <path d="M125 156 l5 -12 l5 12 z" fill="#e8c070"/>
+          <rect x="30" y="170" width="20" height="9" rx="3" fill="#5b3318"/><rect x="200" y="170" width="20" height="9" rx="3" fill="#5b3318"/>
+        </svg>
+      </div>
+      <i class="fall" style="--x:74%;--y:68%;--r0:-40deg;--r1:-8deg;--d:2.6s;--t:.2s"></i>
+      <i class="fall" style="--x:84%;--y:66%;--r0:50deg;--r1:14deg;--d:3s;--t:.7s"></i>
+      <i class="fall" style="--x:78%;--y:76%;--r0:-70deg;--r1:5deg;--d:2.8s;--t:1.1s"></i>
+      <i class="fall" style="--x:86%;--y:76%;--r0:30deg;--r1:-16deg;--d:3.2s;--t:1.6s"></i>
+      <i class="fall" style="--x:80%;--y:71%;--r0:-20deg;--r1:22deg;--d:3.4s;--t:2s"></i>      <i class="sparkle" style="left:46%;top:36%;animation-delay:.4s"></i>
+      <i class="fall" style="--x:74%;--y:68%;--r0:-40deg;--r1:-8deg;--d:2.6s;--t:.2s"></i>
+      <i class="fall" style="--x:84%;--y:66%;--r0:50deg;--r1:14deg;--d:3s;--t:.7s"></i>
+      <i class="fall" style="--x:78%;--y:76%;--r0:-70deg;--r1:5deg;--d:2.8s;--t:1.1s"></i>
+      <i class="fall" style="--x:86%;--y:76%;--r0:30deg;--r1:-16deg;--d:3.2s;--t:1.6s"></i>
+      <i class="fall" style="--x:80%;--y:71%;--r0:-20deg;--r1:22deg;--d:3.4s;--t:2s"></i>      <i class="sparkle" style="left:22%;top:52%;animation-delay:1.8s"></i>
+      <i class="fall" style="--x:74%;--y:68%;--r0:-40deg;--r1:-8deg;--d:2.6s;--t:.2s"></i>
+      <i class="fall" style="--x:84%;--y:66%;--r0:50deg;--r1:14deg;--d:3s;--t:.7s"></i>
+      <i class="fall" style="--x:78%;--y:76%;--r0:-70deg;--r1:5deg;--d:2.8s;--t:1.1s"></i>
+      <i class="fall" style="--x:86%;--y:76%;--r0:30deg;--r1:-16deg;--d:3.2s;--t:1.6s"></i>
+      <i class="fall" style="--x:80%;--y:71%;--r0:-20deg;--r1:22deg;--d:3.4s;--t:2s"></i>      <i class="sparkle" style="left:80%;top:48%;animation-delay:2.6s"></i>
+    </div>
+
+    <div class="panel">
+      <section class="funkboard" aria-labelledby="fbtitle">
+        <h3 id="fbtitle" data-i18n="wf_board_title">Funksprüche</h3>
+        <p class="fbsub" data-i18n="wf_board_sub">Wer meldet sich sonst noch im Wichtelfunk?</p>
+        <div class="funkwho" role="group" aria-labelledby="fbtitle">
+          <button type="button" class="btn small" data-who="fips" data-i18n="wf_who_fips">Fips</button>
+          <button type="button" class="btn small" data-who="nik" data-i18n="wf_who_nik">Nikolaus</button>
+          <button type="button" class="btn small" data-who="tuf" data-i18n="wf_who_tuf">Meister Tüftel</button>
+          <button type="button" class="btn small alt" data-who="any" data-i18n="wf_any">Zufällig</button>
+        </div>
+        <div class="funkline" id="funkline" role="status" aria-live="polite" hidden><b id="funkwho"></b><p id="funktext"></p></div>
+        <button class="link" id="funktoggle" type="button" aria-pressed="true"></button>
+      </section>
+      <section class="taskbox">
+      <p class="tasktag" data-i18n="wf_task_tag">Zur Aufgabe: Fips’ Hilferuf</p>
+      <button class="btn" id="play" type="button" aria-describedby="state"><span class="ico" id="ico" aria-hidden="true">▶</span><span id="lbl">Nachricht abspielen</span></button>
+      <p class="state" id="state" role="status" aria-live="polite">Tippe auf die Taste und hör gut zu.</p>
+      <p class="error" id="err" role="alert" hidden data-i18n="wf_err">Oh je, Fips&rsquo; Nachricht konnte gerade nicht geladen werden.</p>
+      <p class="gnote" id="gnote" hidden></p>
+      <button class="link" id="toggle" type="button" aria-expanded="false" aria-controls="scroll">Nachricht mitlesen</button>
+      <div class="scroll" id="scroll" hidden>
+        <span class="t" data-i18n="wf_scroll_title">Fips sagt:</span>
+        <p lang="de" id="dep">„Hallo, Hallo! Hier ist Fips! Oh je, ich glaube, ich habe etwas Wichtiges vergessen! Könnt ihr mir helfen? Ich habe zuletzt einen kleinen roten Briefkasten gesehen. Vielleicht findet ihr dort die nächste Spur!“</p>
+        <div class="trans" id="trans" hidden><span class="tl" id="transl"></span><p id="transp"></p></div>
+      </div>
+      </section>
+    </div>
+  </div>
+  <audio id="audio" preload="auto" src="fips.mp3"></audio>
+</div>
+
+<script>
+/* ---------- Schnee nur vor dem Fenster ---------- */
+(function () {
+  var cv = document.getElementById("snow"), cx = cv.getContext("2d"), W, H, flakes = [];
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  function size() { var d = window.devicePixelRatio || 1, r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0);
+    flakes = []; for (var i = 0; i < 34; i++) flakes.push({ x: Math.random() * W, y: Math.random() * H, r: 1 + Math.random() * 2.4, s: 0.25 + Math.random() * 0.55, p: Math.random() * 6.28 }); }
+  function tick() {
+    cx.clearRect(0, 0, W, H); cx.fillStyle = "rgba(255,255,255,.9)";
+    flakes.forEach(function (f) { f.y += f.s; f.p += 0.012; f.x += Math.sin(f.p) * 0.3; if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; }
+      cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, 6.283); cx.fill(); });
+    requestAnimationFrame(tick);
+  }
+  size(); addEventListener("resize", size); tick();
+})();
+
+/* ---------- Audio ---------- */
+var audio = document.getElementById("audio"), app = document.getElementById("app"), btn = document.getElementById("play"),
+    lbl = document.getElementById("lbl"), ico = document.getElementById("ico"), state = document.getElementById("state"), err = document.getElementById("err");
+var mode = "idle", fails = false;
+function ui(m) {
+  mode = m;
+  app.classList.toggle("playing", m === "play"); app.classList.toggle("paused", m === "pause");
+  var T = I18N.t;
+  if (m === "play") { lbl.textContent = T("wf_pause"); ico.textContent = "❚❚"; state.textContent = T("wf_state_play"); }
+  else if (m === "pause") { lbl.textContent = T("wf_resume"); ico.textContent = "▶"; state.textContent = T("wf_state_pause"); }
+  else if (m === "done") { lbl.textContent = T("wf_again"); ico.textContent = "↻"; state.textContent = T("wf_state_done"); }
+  else { lbl.textContent = T("wf_play"); ico.textContent = "▶"; state.textContent = T("wf_state_idle"); }
+}function fail() { ui("idle"); err.hidden = false; state.textContent = ""; fails = true; }
+audio.addEventListener("error", fail);
+audio.addEventListener("ended", function () { ui("done"); });
+btn.addEventListener("click", function () {
+  err.hidden = true;
+  if (!audio.paused && !audio.ended) { audio.pause(); ui("pause"); return; }
+  if (audio.ended) audio.currentTime = 0;
+  var p = audio.play();
+  ui("play");
+  if (p && p.catch) p.catch(fail);
+});
+
+
+
+
+
+/* ---------- leises Radio-Knistern, solange die Nachricht läuft (erst nach dem Tippen auf die Taste) ---------- */
+(function () {
+  var ac = null, buf = null, timer = null;
+  function ctx() {
+    if (ac) return ac;
+    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+    try { ac = new AC(); buf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate); var d = buf.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } catch (e) { ac = null; }
+    return ac;
+  }
+  function burst(dur, gain, freq) {
+    if (!ac || !buf) return;
+    var s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(), t = ac.currentTime;
+    s.buffer = buf; f.type = "bandpass"; f.frequency.value = freq; f.Q.value = 0.8;
+    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(gain, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(ac.destination); s.start(t, Math.random() * 0.5, dur + 0.02);
+  }
+  function loop() {
+    if (audio.paused || audio.ended) { timer = null; return; }
+    burst(0.02 + Math.random() * 0.05, 0.012 + Math.random() * 0.03, 1500 + Math.random() * 3500);
+    timer = setTimeout(loop, 120 + Math.random() * 700);
+  }
+  function stop() { clearTimeout(timer); timer = null; }
+  btn.addEventListener("click", function () { var c = ctx(); if (c && c.state === "suspended") c.resume(); });   /* im Tipp-Ereignis, damit der Browser es erlaubt */
+  audio.addEventListener("play", function () { if (!ac) return; burst(0.6, 0.04, 2500); stop(); timer = setTimeout(loop, 450); });
+  audio.addEventListener("pause", stop);
+  audio.addEventListener("ended", stop);
+  window.WF_burst = function (dur, gain, freq) { var c = ctx(); if (c) { if (c.state === "suspended") c.resume(); burst(dur, gain, freq); } };   /* für die Funksprüche (nur, wenn schon einmal abgespielt wurde) */
+})();
+/* ---------- leiser Schneefall im ganzen Fenster ---------- */
+(function () {
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var cv = document.getElementById("bgsnow"), cx = cv.getContext("2d"), W, H, fl = [];
+  function size() { var d = window.devicePixelRatio || 1; W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0);
+    fl = []; var n = Math.round(W * H / 14000); for (var i = 0; i < n; i++) fl.push({ x: Math.random() * W, y: Math.random() * H, r: 1.2 + Math.random() * 2.6, s: 0.25 + Math.random() * 0.55, p: Math.random() * 6.28 }); }
+  function tick() { cx.clearRect(0, 0, W, H); cx.fillStyle = "rgba(255,255,255,.92)";
+    fl.forEach(function (f) { f.y += f.s; f.p += 0.012; f.x += Math.sin(f.p) * 0.35; if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; } cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, 6.283); cx.fill(); });
+    requestAnimationFrame(tick); }
+  size(); addEventListener("resize", size); tick();
+})();
+
+/* ---------- optional: eigener gemalter Hintergrund und Siegel ---------- */
+(function () {
+  var b = new Image(); b.onload = function () { document.body.style.backgroundImage = 'url("assets/wf_bg.jpg")'; document.body.classList.add("has-bg"); }; b.src = "assets/wf_bg.jpg";
+  var s = new Image(); s.onload = function () { document.body.style.setProperty("--sealimg", 'url("assets/wf_seal.png")'); document.body.classList.add("has-seal"); }; s.src = "assets/wf_seal.png";
+})();
+/* ---------- Optionale gemalte PNGs (Fips + Nikolaus, Radio) ---------- */
+(function () {
+  var stage = document.getElementById("stage");
+  var f = new Image(); f.onload = function () { stage.style.setProperty("--fipsimg", 'url("assets/wf_fips.png")'); stage.style.setProperty("--fipsar", f.naturalWidth / f.naturalHeight); stage.querySelector(".fips").style.aspectRatio = f.naturalWidth / f.naturalHeight; stage.classList.add("has-fips"); };
+  f.src = "assets/wf_fips.png";
+  var r = new Image(); r.onload = function () { var a = document.getElementById("radioart"); a.src = "assets/wf_radio.png"; stage.classList.add("has-radio"); };
+  r.src = "assets/wf_radio.png";
+})();
+/* ---------- Siegel brechen ---------- */
+(function () {
+  var seal = document.getElementById("seal"), app = document.getElementById("app");
+  function open() {
+    if (!app.classList.contains("sealed") || app.classList.contains("opening")) return;
+    app.classList.add("opening");
+    setTimeout(function () { app.classList.remove("sealed", "opening"); app.classList.add("app-open"); btn.focus({ preventScroll: true }); }, 700);
+  }
+  seal.addEventListener("click", open);
+})();
+/* ---------- Text mitlesen ---------- */
+var tg = document.getElementById("toggle"), sc = document.getElementById("scroll");
+function updateToggle() { tg.textContent = sc.hidden ? I18N.t("wf_read") : I18N.t("wf_hide"); }
+tg.addEventListener("click", function () {
+  var open = sc.hidden; sc.hidden = !open; tg.setAttribute("aria-expanded", String(open));
+  updateToggle();
+});
+/* ---------- Sprache ---------- */
+function langUpdate() {
+  var T = I18N.t, l = I18N.lang();
+  /* Hörnachricht in der Sprache des Besuchers: de, en, hu */
+  var want = l === "en" ? "fips_en.mp3" : (l === "hu" ? "fips_hu.mp3" : "fips.mp3");
+  if (audio.getAttribute("src") !== want) { audio.pause(); audio.src = want; fails = false; err.hidden = true; ui("idle"); }
+  ui(mode); updateToggle();
+  document.getElementById("dep").hidden = (l !== "de");
+  var tr = document.getElementById("trans");
+  tr.hidden = (l === "de");
+  document.getElementById("transl").textContent = "";
+  document.getElementById("transp").textContent = T("wf_trans_text");
+  var gn = document.getElementById("gnote"); gn.hidden = true;
+  if (fails) err.hidden = false;
+}
+document.addEventListener("langchange", langUpdate);
+</script>
+<script src="data/i18n.js"></script>
+<script src="data/radio_lines.js"></script>
+<script src="music.js"></script>
+<script>
+/* Zufällige Funksprüche: ab und zu meldet sich Fips oder der Nikolaus mit einem kurzen Spruch (erst nach dem Öffnen des Siegels, nicht während die Hauptnachricht läuft). */
+(function () {
+  var KEY = "sternenpost-funk-lines", app = document.getElementById("app"), stage = document.getElementById("stage"), box = document.getElementById("funkline"),
+      who = document.getElementById("funkwho"), txt = document.getElementById("funktext"), tg = document.getElementById("funktoggle");
+  var on = true, next = 0, hideT = null, last = null, openedAt = 0, curAud = null;
+  try { on = localStorage.getItem(KEY) !== "off"; } catch (e) {}
+  function label() { tg.textContent = I18N.t(on ? "wf_lines_on" : "wf_lines_off"); tg.setAttribute("aria-pressed", String(on)); if (!on) box.hidden = true; }
+  tg.addEventListener("click", function () { on = !on; try { localStorage.setItem(KEY, on ? "on" : "off"); } catch (e) {} label(); if (on) next = Date.now() + 8000; });
+  document.addEventListener("langchange", label);
+  [].forEach.call(document.querySelectorAll(".funkwho [data-who]"), function (b) { b.addEventListener("click", function () { show(b.getAttribute("data-who")); next = Date.now() + 45000; }); });
+  function show(filter) {
+    var all = window.RADIO_LINES || [], L = (filter && filter !== "any") ? all.filter(function (x) { return x.who === filter; }) : all, i; if (!L.length) return;
+    do { i = Math.floor(Math.random() * L.length); } while (L.length > 1 && L[i] === last); last = L[i];
+    var e = L[i], lang = I18N.lang();
+    who.textContent = I18N.t({ nik: "wf_who_nik", tuf: "wf_who_tuf" }[e.who] || "wf_who_fips") + ":"; txt.textContent = e[lang] || e.de; box.hidden = false;
+    if (window.WF_burst) { window.WF_burst(0.5, 0.035, 2400); }
+    stage.classList.add("chatter"); clearTimeout(hideT);
+    hideT = setTimeout(function () { box.hidden = true; stage.classList.remove("chatter"); }, Math.max(13000, (txt.textContent.length) * 95));
+    if (curAud) { try { curAud.pause(); } catch (x) {} curAud = null; }
+    var a = e.audio && e.audio[lang]; if (a) { try { curAud = new Audio(a); curAud.volume = 0.9; curAud.play().catch(function () {}); } catch (x) {} }
+  }
+  setInterval(function () {
+    var audio = document.getElementById("audio");
+    if (!on || document.hidden || !app.classList.contains("app-open") || (audio && !audio.paused && !audio.ended)) return;
+    var now = Date.now(); if (!openedAt) { openedAt = now; next = now + 14000; }
+    if (now >= next && box.hidden) { show(); next = Date.now() + 35000 + Math.random() * 35000; }
+  }, 3000);
+  label();
+})();
+</script>
+</body>
+</html>
