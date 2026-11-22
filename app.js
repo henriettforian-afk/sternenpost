@@ -4,7 +4,8 @@
 (function () {
   var D = window.ADVENT, X = window.DECOR, S = window.AdventState, I = window.I18N, T = I.t;
   var qs = new URLSearchParams(location.search);
-  var testDate = qs.get("datum");
+  var DEV_ALLOWED = window.SP_DEV === true;   /* aus devconfig.js: nur lokal true, öffentlich false oder Datei fehlt */
+  var testDate = DEV_ALLOWED ? qs.get("datum") : null;
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function berlinNow() {
@@ -194,11 +195,12 @@
   });
   $("btnReset2").addEventListener("click", function () { $("btnReset").click(); });
   function devFlag() { try { return localStorage.getItem("sternenpost-dev") === "1"; } catch (e) { return false; } }
-  var DEV = qs.get("dev") === "1" || !!testDate || devFlag();
-  /* Versteckter Zugang für den Entwickler: Überschrift 5 Mal schnell antippen schaltet das Testmenü an/aus */
+  var DEV = DEV_ALLOWED && (qs.get("dev") === "1" || !!testDate || devFlag());
+  /* Versteckter Zugang für den Entwickler: Überschrift 5 Mal schnell antippen schaltet das Testmenü an/aus.
+     Nur wenn devconfig.js SP_DEV = true setzt (nur auf dem eigenen Rechner); auf der öffentlichen Seite gibt es kein Testmenü. */
   (function () {
     var taps = 0, t0 = 0, h = document.querySelector("h1");
-    if (!h) return;
+    if (!h || !DEV_ALLOWED) return;
     h.addEventListener("click", function () {
       var n = Date.now(); if (n - t0 > 3000) taps = 0; t0 = n; taps++;
       if (taps >= 5) { taps = 0; var on = !devFlag(); try { localStorage.setItem("sternenpost-dev", on ? "1" : "0"); } catch (e) {}
