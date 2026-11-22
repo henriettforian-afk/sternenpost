@@ -2,9 +2,9 @@
    Format: ADVENT_TX.<sprache>[tag] = { title, paragraphs } */
 window.ADVENT_TX = {
   en: {
-    1:  { title: "Fips is looking for his mail", paragraphs: [
-      "Hello! I'm Fips, the post elf of Snow Village. Today I'm in an extra big hurry, because Christmas is almost here!",
-      "Only … where did I put my letters? Maybe the Elf Radio can help us. I recorded a secret message for you." ] },
+    1:  { title: "Welcome to Snow Village", paragraphs: [
+      "Hello! I'm Fips, the post elf of Snow Village. I'm so glad you're here! From today you may open a new door every day.",
+      "Behind every door a little story is waiting. And if you feel like playing a game or decorating the Christmas tree, you will find both right at the top. Have fun!" ] },
     2:  { title: "Luni behind the hay", paragraphs: [
       "In the stable at the edge of the village lives Luni, a young reindeer. She is curious, but also a little shy.",
       "When someone comes, she hides behind the hay bale and peeks out with just one eye. Why not visit her today? With a little hay she will surely find her courage." ] },

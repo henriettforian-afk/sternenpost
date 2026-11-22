@@ -23,10 +23,10 @@ window.ADVENT = {
   ],
 
   days: [
-    { day: 1, title: "Fips sucht seine Post", speaker: "fips_think", light: 3, audio: "fips.mp3", audioEn: "fips_en.mp3", audioHu: "fips_hu.mp3",
+    { day: 1, title: "Willkommen im Schneedorf", speaker: "fips_wave", light: 3,
       paragraphs: [
-        "Hallo! Ich bin Fips, der Postwichtel im Schneedorf. Heute habe ich es besonders eilig, denn bald ist Weihnachten!",
-        "Nur … wo habe ich bloß meine Briefe hingelegt? Vielleicht hilft uns das Wichtelfunk. Ich habe dir eine geheime Nachricht aufgenommen." ] },
+        "Hallo! Ich bin Fips, der Postwichtel im Schneedorf. Schön, dass du da bist! Ab heute darfst du jeden Tag ein neues Türchen öffnen.",
+        "Hinter jedem Türchen wartet eine kleine Geschichte. Und wenn du Lust auf ein Spiel hast oder den Weihnachtsbaum schmücken möchtest, findest du beides gleich oben. Viel Freude!" ] },
     { day: 2, title: "Luni hinter dem Heu", speaker: "luni_hide", light: 3,
       paragraphs: [
         "Im Stall am Dorfrand wohnt Luni, ein junges Rentier. Sie ist neugierig, aber auch ein bisschen schüchtern.",

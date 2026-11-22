@@ -1,9 +1,9 @@
 /* Magyar szövegek (a te szerkesztésed alapján). Ezt a fájlt bátran szerkesztheted. */
 window.ADVENT_TX = window.ADVENT_TX || {};
 window.ADVENT_TX.hu = {
-  1:  { title: "Fips a postáját keresi", paragraphs: [
-    "Szia! Fips vagyok, a Hófalu postamanója. Ma különösen sietek, mert mindjárt karácsony van!",
-    "Csak … hová tettem a leveleimet? Talán a Manórádió segít. Felvettem neked egy titkos üzenetet." ] },
+  1:  { title: "Isten hozott a Hófaluban", paragraphs: [
+    "Szia! Fips vagyok, a Hófalu postamanója. Örülök, hogy itt vagy! Mától minden nap kinyithatsz egy új ajtót.",
+    "Minden ajtó mögött egy kis történet vár. Ha kedved van játszani, vagy feldíszítenéd a karácsonyfát, mindkettőt ott találod fent. Jó szórakozást!" ] },
   2:  { title: "Luni a széna mögött", paragraphs: [
     "A falu szélén lévő istállóban lakik Luni, egy fiatal rénszarvas. Kíváncsi, de egy kicsit félénk is.",
     "Ha valaki jön, elbújik a szénabála mögé, és csak az egyik szemével les ki. Látogasd meg ma! Egy kis szénával biztosan összeszedi a bátorságát." ] },
