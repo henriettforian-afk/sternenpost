@@ -703,3 +703,13 @@ body.hub-open .mcard { max-width: 720px; }
 /* Baum-Lichterkette: kräftigeres Leuchten */
 .tleds { filter: drop-shadow(0 0 5px rgba(255, 220, 130, .9)); }
 @keyframes ledtw { 0%,100% { opacity: 1; } 50% { opacity: .65; } }
+
+/* Telefon: Fips- und Luni-Karika kleiner und weiter unten, damit sie weniger verdecken */
+@media (max-width: 600px) {
+  .fipsbtn, .lunibtn { width: 56px !important; height: 56px !important; border-width: 3px; }
+  .fipshelper, .lunihelper { bottom: 8px !important; }
+  .fipshelper { right: 6px; } .lunihelper { left: 6px; }
+  .fipsbtn, .lunibtn { opacity: .92; }
+  body { padding-bottom: 76px; }
+}
+@media (max-width: 600px) { #btnReset { margin-bottom: 84px; } }
